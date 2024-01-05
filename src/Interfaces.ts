@@ -1,4 +1,3 @@
-import { IExplosion } from "backend/Interfaces"
 import { Keys } from "./Input"
 
 interface State {
@@ -15,10 +14,11 @@ interface IMessage {
     explosions: IExplosion[]
 }
 
-// interface IExplosion {
-//     playerId: string,
-//     entity: State
-// }
+interface IExplosion {
+    x: number
+    y: number
+    bulletId: string
+}
 
 type Shell = {
     id: string

@@ -1,7 +1,7 @@
 import Client from "./Client.js";
 import { Player, PlayerTest } from "./units/Player.js";
 import { io, Socket } from "socket.io-client";
-import { ClientToServerEvents, Discover, IMessage, Join, ServerToClientEvents } from "./Interfaces.js";
+import { ClientToServerEvents, Discover, IMessage, ServerToClientEvents } from "./Interfaces.js";
 
 class Network {
 
@@ -14,7 +14,7 @@ class Network {
     }
 
     init(client: Client) {
-        let network = this;
+        let network = this; 
 
         this.socket.emit('DISCOVER');
 
@@ -24,7 +24,7 @@ class Network {
             document.getElementById("play")?.addEventListener("click", () => { network.socket.emit('JOIN', { uid: data.uid }) }, false)
         })
 
-        this.socket.on('JOIN', function (data: Join) {
+        this.socket.on('JOIN', function (data: any) {
             console.log(111);
             client.players.push(new Player(client.playerId, 0, 0))
             document.getElementById("game-start")?.classList.remove("show");
