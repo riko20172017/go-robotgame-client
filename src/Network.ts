@@ -1,12 +1,21 @@
 import Client from "./Client.js";
 import { Player, PlayerTest } from "./units/Player.js";
-import { io, Socket } from "socket.io-client";
 import { ClientToServerEvents, Discover, IMessage, ServerToClientEvents } from "./Interfaces.js";
+
+function io() {
+    return new Socket()
+}
+
+class Socket {
+    emit(text: "JOIN" | "DISCOVER" | "movement", obj?: {}) { }
+    on(text: "DISCOVER" | 'JOIN' | "state", fn: ((data: Discover) => void) | ((data: IMessage) => void)) { }
+}
 
 class Network {
 
     messages: IMessage[]
-    socket: Socket<ServerToClientEvents, ClientToServerEvents>
+    socket: Socket
+    test: number = 2
 
     constructor() {
         this.messages = []
@@ -14,7 +23,7 @@ class Network {
     }
 
     init(client: Client) {
-        let network = this; 
+        let network = this;
 
         this.socket.emit('DISCOVER');
 

@@ -7,7 +7,7 @@ import Settings from "./Config.js";
 var isGameOver;
 var gameTime = 0;
 
-class App {
+class App {   
 
     ctx: CanvasRenderingContext2D
     canvas: HTMLCanvasElement

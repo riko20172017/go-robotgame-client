@@ -1,4 +1,4 @@
-import Sprite from "src/Sprite";
+import Sprite from "../Sprite";
 
 abstract class Entity {
     id: string;
