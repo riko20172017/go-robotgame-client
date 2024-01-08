@@ -40,10 +40,10 @@ class App {
         this.isGameOver = false
 
         this.resources.load([
-            'public/img/sprites.png',
-            'public/img/terrain.png',
-            'public/img/player.png',
-            'public/img/playerTest.png',
+            'img/sprites.png',
+            'img/terrain.png',
+            'img/player.png',
+            'img/playerTest.png',
         ]);
 
         this.resources.onReady(() => this.init());
@@ -52,7 +52,7 @@ class App {
     init() {
         this.canvas.width = Settings.width;
         this.canvas.height = Settings.height;
-        this.terrainPattern = this.ctx.createPattern(this.resources.get('public/img/terrain.png'), 'repeat')
+        this.terrainPattern = this.ctx.createPattern(this.resources.get('img/terrain.png'), 'repeat')
         document.body.appendChild(this.canvas);
 
 

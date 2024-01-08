@@ -8,7 +8,7 @@ class Explosion extends Entity {
         super("", x, y)
         this.sprite = new Sprite
             (
-                'public/img/sprites.png',
+                'img/sprites.png',
                 [0, 117],
                 [39, 39],
                 16,

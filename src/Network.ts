@@ -15,7 +15,7 @@ class Network {
 
     messages: IMessage[]
     socket: Socket
-    test: number = 2
+    test: number = 3
 
     constructor() {
         this.messages = []

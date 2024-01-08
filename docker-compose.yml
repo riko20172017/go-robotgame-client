@@ -2,14 +2,14 @@ version: '3.7'
 
 services:
   robotgame-client:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: base
+    image: riko2018/robotgame-client
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    #   target: base
     volumes:
       - ./src:/home/node/app/src
       - ./nodemon.json:/home/node/app/nodemon.json
-    container_name: robotgame-client
     expose:
       - '4000'
     ports:
