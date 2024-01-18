@@ -5,7 +5,7 @@ import { Player } from "./units/Player.js"
 import Settings from "./Config.js";
 
 var isGameOver;
-var gameTime = 0;
+var gameTime = 0; 
 
 class App {   
 
