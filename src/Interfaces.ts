@@ -32,6 +32,7 @@ type Shell = {
 }
 
 interface IInput {
+    type: string
     tik: number
     delta: number
     uid: string

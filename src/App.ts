@@ -55,8 +55,7 @@ class App {
         this.terrainPattern = this.ctx.createPattern(this.resources.get('img/terrain.png'), 'repeat')
         document.body.appendChild(this.canvas);
 
-
-        this.main(60)
+        this.main(30)
     }
 
     main(hz: number) {
@@ -83,7 +82,7 @@ class App {
             this.tik++;
         }
 
-        this.update_interval = requestAnimationFrame(function () { self.main(60) });
+        this.update_interval = requestAnimationFrame(function () { self.main(30) });
 
 
         // cancelAnimationFrame(this.update_interval);

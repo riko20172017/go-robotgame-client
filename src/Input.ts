@@ -1,9 +1,9 @@
 class Keys {
-    SPACE = false
-    LEFT = false
-    UP = false
-    RIGHT = false
-    DOWN = false
+    SPACE = 0
+    LEFT = 0
+    UP = 0
+    RIGHT = 0
+    DOWN = 0
     MOUSE = { x: 0, y: 0 }
 }
 
@@ -18,7 +18,7 @@ class Input {
         document.addEventListener('mousemove', this.mousemove.bind(this));
     }
 
-    setKey(event: KeyboardEvent, status: boolean) {
+    setKey(event: KeyboardEvent, status: number) {
         switch (event.keyCode) {
             case 32:
                 this.keys.SPACE = status; break;
@@ -35,19 +35,19 @@ class Input {
     }
 
     keydown(e: KeyboardEvent) {
-        this.setKey(e, true);
+        this.setKey(e, 1);
     }
 
     keyup(e: KeyboardEvent) {
-        this.setKey(e, false);
+        this.setKey(e, 0);
     }
 
     blur() {
-        this.keys.SPACE = false
-        this.keys.LEFT = false
-        this.keys.UP = false
-        this.keys.RIGHT = false
-        this.keys.DOWN = false
+        this.keys.SPACE = 0
+        this.keys.LEFT = 0
+        this.keys.UP = 0
+        this.keys.RIGHT = 0
+        this.keys.DOWN = 0
     };
 
 

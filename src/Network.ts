@@ -36,17 +36,21 @@ class Network {
     }
 
     init(client: Client) {
-
         this.reader((data: any) => {
-            console.log(data);
-            
-            switch (data.command) {
-                case "DISCOVER":
+
+            switch (data.type) {
+                case "OFFER":
                     client.playerId = data.uid
                     document.getElementById("game-start")?.classList.add("show");
-                    document.getElementById("play")?.addEventListener("click", () => { this.writer('JOIN') }, false)
+                    document.getElementById("play")?.addEventListener("click", () => { this.send({ "type": "REQUEST", "id": 1 }) }, false)
                     break;
-
+                case "JOIN":
+                    console.log("JOIN");
+                    client.players.push(new Player(client.playerId, 0, 0))
+                    document.getElementById("game-start")?.classList.remove("show");
+                    break;
+                case "DATA":
+                    console.log(data.x, data.y);
                 default:
                     break;
             }
@@ -98,8 +102,8 @@ class Network {
         }
     }
 
-    writer(data: any) {
-        this.datagramWriter.write(this.encoder.encode(data))
+    send(data: any) {
+        this.datagramWriter.write(this.encoder.encode(JSON.stringify(data)))
     }
 
     async closeTransport(transport: WebTransport) {

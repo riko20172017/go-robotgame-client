@@ -187,6 +187,7 @@ class Client {
 
     if (keys.DOWN || keys.UP || keys.RIGHT || keys.LEFT || keys.SPACE) {
       let input: IInput = {
+        type: "DATA",
         tik: this.tik,
         uid: this.playerId,
         delta,
@@ -245,7 +246,7 @@ class Client {
 
       // Process fire end -----------------------------------------------------------------------
 
-      this.network.socket.emit('movement', input);
+      this.network.send(input); 
 
       this.pending_inputs.push(input)
       this.stateBufer.push({ tik: this.tik, state: [player.x, player.y] });
