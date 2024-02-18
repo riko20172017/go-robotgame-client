@@ -39,8 +39,8 @@ class Client {
     this.stateBufer = []
     this.lastFire = performance.now()
     this.server_reconciliation = false
-    this.entity_interpolation = true
-    this.client_side_prediction = true
+    this.entity_interpolation = false
+    this.client_side_prediction = false
     this.tik = 0
     this.network = new Network()
     this.input = new Input()
@@ -77,31 +77,31 @@ class Client {
       if (!message) break; /*⛔*/
 
       let states = message.states
-      let shells = message.bullets
-      let explosions = message.explosions
+      // let shells = message.bullets
+      // let explosions = message.explosions
 
       // Add bullets
-      for (let i = 0; i < shells.length; i++) {
-        const shell = shells[i];
-        if (shell.playerId !== this.playerId) {
-          this.shells.push(new Rocket(
-            shell.id,
-            shell.playerId,
-            shell.x,
-            shell.y,
-            shell.tx,
-            shell.ty,
-          ))
-        }
-      }
+      // for (let i = 0; i < shells.length; i++) {
+      //   const shell = shells[i];
+      //   if (shell.playerId !== this.playerId) {
+      //     this.shells.push(new Rocket(
+      //       shell.id,
+      //       shell.playerId,
+      //       shell.x,
+      //       shell.y,
+      //       shell.tx,
+      //       shell.ty,
+      //     ))
+      //   }
+      // }
 
       // Add explosions
-      for (let i = 0; i < explosions.length; i++) {
-        const explosion = explosions[i];
-        this.explosions.push(new Explosion(explosion.x, explosion.y))
-        let bulletIndex = this.shells.findIndex(bullet => bullet.id == explosion.bulletId)
-        this.shells.splice(bulletIndex, 1)
-      }
+      // for (let i = 0; i < explosions.length; i++) {
+      //   const explosion = explosions[i];
+      //   this.explosions.push(new Explosion(explosion.x, explosion.y))
+      //   let bulletIndex = this.shells.findIndex(bullet => bullet.id == explosion.bulletId)
+      //   this.shells.splice(bulletIndex, 1)
+      // }
 
       // World state is a list of entity states.
       for (var i = 0; i < states.length; i++) {/*➿*/

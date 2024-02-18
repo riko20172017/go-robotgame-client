@@ -50,7 +50,8 @@ class Network {
                     document.getElementById("game-start")?.classList.remove("show");
                     break;
                 case "DATA":
-                    console.log(data.x, data.y);
+                    // console.log(data);
+                    this.messages.push(data);
                 default:
                     break;
             }
