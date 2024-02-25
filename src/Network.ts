@@ -37,20 +37,19 @@ class Network {
 
     init(client: Client) {
         this.reader((data: any) => {
-
-            switch (data.type) {
+            switch (data.mtype) {
                 case "OFFER":
                     client.playerId = data.uid
-                    document.getElementById("game-start")?.classList.add("show");
-                    document.getElementById("play")?.addEventListener("click", () => { this.send({ "type": "REQUEST", "id": 1 }) }, false)
-                    break;
-                case "JOIN":
-                    console.log("JOIN");
                     client.players.push(new Player(client.playerId, 0, 0))
-                    document.getElementById("game-start")?.classList.remove("show");
+                    // document.getElementById("game-start")?.classList.add("show");
+                    // document.getElementById("play")?.addEventListener("click", () => { this.send({ "type": "REQUEST", "id": 1 }) }, false)
                     break;
+                // case "JOIN":
+                //     console.log("JOIN");
+                //     client.players.push(new Player(client.playerId, 0, 0))
+                //     document.getElementById("game-start")?.classList.remove("show");
+                //     break;
                 case "DATA":
-                    // console.log(data);
                     this.messages.push(data);
                 default:
                     break;
