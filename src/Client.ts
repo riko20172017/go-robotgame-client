@@ -239,26 +239,26 @@ class Client {
           y: shell.y,
           tx: shell.tx,
           ty: shell.ty,
-          radian: shell.radian,
+          radian: shell.angle,
           type: shell.type
         }
       }
 
       // Process fire end -----------------------------------------------------------------------
 
-      this.network.send(input); 
+      this.network.send(input);
 
       this.pending_inputs.push(input)
       this.stateBufer.push({ tik: this.tik, state: [player.x, player.y] });
     }
   }
 
-  updateEntities(dt: number) {
+  updateEntities(deltaTime: number) {
     // Update the player sprite animation
     for (const key in this.players) {
       if (Object.hasOwnProperty.call(this.players, key)) {
         const player = this.players[key];
-        player.sprite.update(dt);
+        player.sprite.update(deltaTime);
 
       }
     }
@@ -267,10 +267,10 @@ class Client {
     for (var i = 0; i < this.shells.length; i++) {
       var shell = this.shells[i];
 
-      shell.update(dt)
+      shell.update(deltaTime)
 
       // Remove the bullet if it goes offscreen
-      if (shell.isMoveEnd() || shell.isOutOfScreen()) {
+      if (shell.isMoveEnd(deltaTime) || shell.isOutOfScreen()) {
         // Add explosions
         this.explosions.push(new Explosion(shell.x, shell.y))
         this.shells.splice(i, 1);
@@ -280,7 +280,7 @@ class Client {
 
     // Update all the explosions
     for (var i = 0; i < this.explosions.length; i++) {
-      this.explosions[i].sprite.update(dt);
+      this.explosions[i].sprite.update(deltaTime);
 
       // Remove if animation is done
       if (this.explosions[i].sprite.done) {

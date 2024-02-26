@@ -12,7 +12,7 @@ class Shell extends Entity {
     dx: number
     dy: number
     moves: number
-    radian: number
+    angle: number
     sprite: Sprite
     distance: number
 
@@ -38,33 +38,27 @@ class Shell extends Entity {
         this.moves = 0
         this.distance = 0
         this.sprite = sprite
-        this.radian = 0
+        this.angle = 0
 
         this.init()
 
     }
     init() {
-        var diffx = this.tx - this.x;
-        var diffy = this.ty - this.y;
-        this.distance = Math.sqrt(diffx * diffx + diffy * diffy);
-        this.moves = this.distance / 0.9
-        this.dx = diffx / this.moves;
-        this.dy = diffy / this.moves;
-        this.radian = Math.atan2(diffy, diffx);
+        this.angle = this.calculateAngle(this.x, this.y, this.tx, this.ty);
+        this.dx = Math.cos(this.angle * Math.PI / 180);
+        this.dy = Math.sin(this.angle * Math.PI / 180);
     }
 
-    update(dt: number) {
-        this.x += Config.rocketSpeed * dt * this.dx;
-        this.y += Config.rocketSpeed * dt * this.dy;
+    update(deltaTime: number) {
+
+        this.x += Config.rocketSpeed * this.dx * deltaTime;
+        this.y += Config.rocketSpeed * this.dy * deltaTime;
     }
 
-    isMoveEnd() {
-        var diffx = this.x - this.sx;
-        var diffy = this.y - this.sy;
-        let distance = Math.sqrt(Math.pow(diffx, 2) + Math.pow(diffy, 2));
-        if (distance > this.distance) {
-            return true
-        }
+    isMoveEnd(deltaTime: number) {
+        let distance = Math.sqrt((this.tx - this.x) ** 2 + (this.ty - this.y) ** 2);
+        if (distance > (Config.rocketSpeed * deltaTime)) { return false }
+        else { return true }
     }
 
     isOutOfScreen() {
