@@ -5,7 +5,7 @@ abstract class Entity {
     x: number
     y: number
     speed: number
-    radian: number
+    angle: number
     abstract sprite: Sprite
 
     constructor(id: string, x: number, y: number) {
@@ -13,15 +13,19 @@ abstract class Entity {
         this.x = x;
         this.y = y;
         this.speed = 200
-        this.radian = 0
+        this.angle = 0
     }
 
     changeDirection(dir: string) { }
 
+    calculateAngle(x1: number, y1: number, x2: number, y2: number) {
+        return Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+    }
+
     render(ctx: CanvasRenderingContext2D) {
         ctx.save();
         ctx.translate(this.x, this.y);
-        ctx.rotate(this.radian)
+        ctx.rotate(this.angle)
         this.sprite.render(ctx)
         ctx.restore();
     }
