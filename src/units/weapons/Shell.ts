@@ -45,8 +45,13 @@ class Shell extends Entity {
     }
     init() {
         this.angle = this.calculateAngle(this.x, this.y, this.tx, this.ty);
-        this.dx = Math.cos(this.angle * Math.PI / 180);
-        this.dy = Math.sin(this.angle * Math.PI / 180);
+        if (this.angle < 0) {
+            this.angle = 360 - (-this.angle);
+        }
+        this.angle = this.angle * Math.PI / 180
+
+        this.dx = Math.cos(this.angle);
+        this.dy = Math.sin(this.angle);
     }
 
     update(deltaTime: number) {
